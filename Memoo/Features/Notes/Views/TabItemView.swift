@@ -2,15 +2,22 @@ import SwiftUI
 
 struct TabItemView: View {
     let note: Note
+    let index: Int?
     let isSelected: Bool
     let onSelect: () -> Void
     let onClose: () -> Void
     let onRename: (String) -> Void
     let onDuplicate: () -> Void
 
+    private var displayTitle: String {
+        if let index = index, index < 5 {
+            return "\(index + 1): \(note.title)"
+        }
+        return note.title
+    }
+
     @State private var isEditing = false
     @State private var editedTitle = ""
-    @State private var isHovering = false
 
     var body: some View {
         HStack(spacing: 4) {
@@ -23,20 +30,10 @@ struct TabItemView: View {
                         editedTitle = note.title
                     }
             } else {
-                Text(note.title)
+                Text(displayTitle)
                     .font(.system(size: 12))
                     .lineLimit(1)
                     .truncationMode(.tail)
-            }
-
-            if isHovering || isSelected {
-                Button(action: onClose) {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 8, weight: .bold))
-                        .foregroundStyle(.secondary)
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("CloseTabButton")
             }
         }
         .padding(.horizontal, 12)
@@ -52,9 +49,6 @@ struct TabItemView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             onSelect()
-        }
-        .onHover { hovering in
-            isHovering = hovering
         }
         .contextMenu {
             Button("Rename") {
@@ -86,6 +80,7 @@ struct TabItemView: View {
     HStack {
         TabItemView(
             note: Note(title: "Selected Tab"),
+            index: 0,
             isSelected: true,
             onSelect: {},
             onClose: {},
@@ -94,6 +89,7 @@ struct TabItemView: View {
         )
         TabItemView(
             note: Note(title: "Another Tab"),
+            index: 1,
             isSelected: false,
             onSelect: {},
             onClose: {},

@@ -5,6 +5,20 @@ All notable changes to Memoo will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-01-21
+
+### Added
+
+- Tab/Shift+Tab navigation to switch between tabs (works everywhere, including in editor)
+- Quick access shortcuts ⌘+1 through ⌘+5 to jump to first five tabs
+- Numbered tab titles for first five tabs (e.g., "1: Notes", "2: TODO")
+- Editor font settings — choose font family and size in Settings
+
+### Changed
+
+- Removed close buttons from tabs — use context menu or ⌘+W to close tabs
+- Settings window now includes Editor section with font options
+
 ## [1.0.0] - 2026-01-21
 
 ### Added

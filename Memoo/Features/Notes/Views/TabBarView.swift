@@ -8,9 +8,10 @@ struct TabBarView: View {
         HStack(spacing: 2) {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 2) {
-                    ForEach(viewModel.notes) { note in
+                    ForEach(Array(viewModel.notes.enumerated()), id: \.element.id) { index, note in
                         TabItemView(
                             note: note,
+                            index: index,
                             isSelected: viewModel.selectedNoteID == note.id,
                             onSelect: {
                                 viewModel.selectedNoteID = note.id

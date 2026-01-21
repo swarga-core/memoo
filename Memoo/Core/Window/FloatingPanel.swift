@@ -3,6 +3,8 @@ import SwiftUI
 
 final class FloatingPanel: NSPanel {
 
+    private var localEventMonitor: Any?
+
     init<Content: View>(contentView: Content) {
         super.init(
             contentRect: NSRect(x: 0, y: 0, width: 600, height: 400),
@@ -50,10 +52,33 @@ final class FloatingPanel: NSPanel {
             name: NSWindow.didResizeNotification,
             object: self
         )
+
+        // Local event monitor to intercept Tab before TextEditor
+        setupTabMonitor()
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+        if let monitor = localEventMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+    }
+
+    private func setupTabMonitor() {
+        localEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            guard let self = self, event.window == self else { return event }
+
+            // Tab key (keyCode 48)
+            if event.keyCode == 48 {
+                if event.modifierFlags.contains(.shift) {
+                    NotificationCenter.default.post(name: .selectPreviousTab, object: nil)
+                } else {
+                    NotificationCenter.default.post(name: .selectNextTab, object: nil)
+                }
+                return nil // Consume the event
+            }
+            return event
+        }
     }
 
     override var canBecomeKey: Bool { true }

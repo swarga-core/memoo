@@ -71,17 +71,35 @@ struct NotesCommands: Commands {
                 NotificationCenter.default.post(name: .selectPreviousTab, object: nil)
             }
             .keyboardShortcut("[", modifiers: .command)
+
+            Divider()
+
+            Button("Tab 1") {
+                NotificationCenter.default.post(name: .selectTabAtIndex, object: 0)
+            }
+            .keyboardShortcut("1", modifiers: .command)
+
+            Button("Tab 2") {
+                NotificationCenter.default.post(name: .selectTabAtIndex, object: 1)
+            }
+            .keyboardShortcut("2", modifiers: .command)
+
+            Button("Tab 3") {
+                NotificationCenter.default.post(name: .selectTabAtIndex, object: 2)
+            }
+            .keyboardShortcut("3", modifiers: .command)
+
+            Button("Tab 4") {
+                NotificationCenter.default.post(name: .selectTabAtIndex, object: 3)
+            }
+            .keyboardShortcut("4", modifiers: .command)
+
+            Button("Tab 5") {
+                NotificationCenter.default.post(name: .selectTabAtIndex, object: 4)
+            }
+            .keyboardShortcut("5", modifiers: .command)
         }
     }
-}
-
-// MARK: - Notification Names
-
-extension Notification.Name {
-    static let createNewTab = Notification.Name("createNewTab")
-    static let closeCurrentTab = Notification.Name("closeCurrentTab")
-    static let selectNextTab = Notification.Name("selectNextTab")
-    static let selectPreviousTab = Notification.Name("selectPreviousTab")
 }
 
 // MARK: - View Extension for handling commands
@@ -102,6 +120,11 @@ extension MainContentInnerView {
             }
             .onReceive(NotificationCenter.default.publisher(for: .selectPreviousTab)) { _ in
                 viewModel.selectPreviousNote()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .selectTabAtIndex)) { notification in
+                if let index = notification.object as? Int {
+                    viewModel.selectNote(at: index)
+                }
             }
     }
 }

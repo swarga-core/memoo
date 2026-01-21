@@ -27,6 +27,9 @@
 		/* MenuBar */
 		AAA00017001 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA00017000 /* StatusBarController.swift */; };
 
+		/* Core */
+		AAA00018001 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA00018000 /* NotificationNames.swift */; };
+
 		/* ViewModels */
 		AAA0000A001 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0000A000 /* NotesViewModel.swift */; };
 
@@ -38,6 +41,9 @@
 
 		/* Settings Views */
 		AAA00016001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA00016000 /* SettingsView.swift */; };
+
+		/* Settings Models */
+		AAA00019001 /* EditorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA00019000 /* EditorSettings.swift */; };
 
 		/* Resources */
 		AAA00004001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAA00004000 /* Assets.xcassets */; };
@@ -89,6 +95,9 @@
 		/* MenuBar */
 		AAA00017000 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 
+		/* Core */
+		AAA00018000 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
+
 		/* ViewModels */
 		AAA0000A000 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 
@@ -100,6 +109,9 @@
 
 		/* Settings Views */
 		AAA00016000 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+
+		/* Settings Models */
+		AAA00019000 /* EditorSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorSettings.swift; sourceTree = "<group>"; };
 
 		/* Tests */
 		AAA00005000 /* SetupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTests.swift; sourceTree = "<group>"; };
@@ -167,6 +179,7 @@
 		AAA00300003 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				AAA00018000 /* NotificationNames.swift */,
 				AAA00300020 /* Storage */,
 				AAA00300021 /* Window */,
 				AAA00300023 /* MenuBar */,
@@ -222,6 +235,7 @@
 		AAA00300011 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AAA00300018 /* Models */,
 				AAA00300016 /* Views */,
 				AAA00300017 /* ViewModels */,
 			);
@@ -276,6 +290,14 @@
 			children = (
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AAA00300018 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AAA00019000 /* EditorSettings.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		AAA00300020 /* Storage */ = {
@@ -459,6 +481,8 @@
 				AAA0000E001 /* MainContentView.swift in Sources */,
 				AAA00016001 /* SettingsView.swift in Sources */,
 				AAA00017001 /* StatusBarController.swift in Sources */,
+				AAA00018001 /* NotificationNames.swift in Sources */,
+				AAA00019001 /* EditorSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

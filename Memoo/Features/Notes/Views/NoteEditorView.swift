@@ -6,10 +6,11 @@ struct NoteEditorView: View {
     let onContentChange: (String) -> Void
 
     @FocusState private var isFocused: Bool
+    @State private var editorSettings = EditorSettings.shared
 
     var body: some View {
         TextEditor(text: $content)
-            .font(.system(.body, design: .monospaced))
+            .font(editorSettings.font)
             .scrollContentBackground(.hidden)
             .background(Color(nsColor: .textBackgroundColor))
             .focused($isFocused)

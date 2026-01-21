@@ -3,9 +3,26 @@ import HotKey
 
 struct SettingsView: View {
     @StateObject private var hotKeyManager = HotKeyManager.shared
+    @State private var editorSettings = EditorSettings.shared
 
     var body: some View {
         Form {
+            Section("Editor") {
+                Picker("Font", selection: $editorSettings.fontFamily) {
+                    ForEach(EditorSettings.availableFonts, id: \.self) { font in
+                        Text(font).tag(font)
+                    }
+                }
+
+                HStack {
+                    Text("Size")
+                    Slider(value: $editorSettings.fontSize, in: 10...24, step: 1)
+                    Text("\(Int(editorSettings.fontSize))")
+                        .frame(width: 30)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
             Section("Global Hotkey") {
                 HStack {
                     Text("Toggle Window")
@@ -40,7 +57,7 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 400, height: 250)
+        .frame(width: 400, height: 320)
     }
 
     private var hotKeyDescription: String {

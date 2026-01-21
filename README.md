@@ -11,10 +11,12 @@ A lightweight, floating note-taking app for macOS designed for developers who ne
 - **Global Hotkey** (⌥+Space) - Instantly show/hide the app from anywhere
 - **Floating Window** - Stays on top of other windows, perfect for quick notes
 - **Tab-based Interface** - Organize multiple notes with drag-and-drop reordering
+- **Quick Tab Navigation** - Use Tab/Shift+Tab or ⌘+1-5 to switch between notes
 - **Auto-save** - Notes are automatically saved as you type
 - **Menu Bar Icon** - Quick access from the menu bar
 - **No Dock Icon** - Runs as an accessory app, keeping your dock clean
 - **Local Storage** - All data stored locally using SwiftData
+- **Customizable Editor** - Choose your preferred font and size
 
 ## Installation
 
@@ -43,8 +45,8 @@ A lightweight, floating note-taking app for macOS designed for developers who ne
 1. **Launch** - The app starts minimized to the menu bar
 2. **Toggle Window** - Press ⌥+Space or click the menu bar icon
 3. **Create Tab** - Click the + button in the tab bar
-4. **Switch Tabs** - Click on a tab or use ⌘+1-9
-5. **Close Tab** - Hover over a tab and click ✕, or right-click → Close
+4. **Switch Tabs** - Click on a tab, use Tab/Shift+Tab, or ⌘+1-5
+5. **Close Tab** - Right-click → Close, or ⌘+W
 6. **Rename Tab** - Right-click on a tab → Rename
 7. **Reorder Tabs** - Drag and drop tabs to rearrange
 8. **Hide Window** - Press ⌥+Space or Escape
@@ -57,6 +59,9 @@ A lightweight, floating note-taking app for macOS designed for developers who ne
 | Hide Window | Escape |
 | New Note | ⌘+N |
 | Close Note | ⌘+W |
+| Next Tab | Tab or ⌘+] |
+| Previous Tab | Shift+Tab or ⌘+[ |
+| Jump to Tab 1-5 | ⌘+1 through ⌘+5 |
 | Settings | ⌘+, |
 | Quit | ⌘+Q |
 
@@ -65,6 +70,7 @@ A lightweight, floating note-taking app for macOS designed for developers who ne
 Access Settings via the menu bar icon → Settings, or press ⌘+,
 
 - **Global Hotkey** - Customize the hotkey to show/hide the app
+- **Editor Font** - Choose font family and size for the editor
 
 ## Architecture
 
