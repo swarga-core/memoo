@@ -2,6 +2,8 @@
 
 A lightweight, floating note-taking app for macOS designed for developers who need quick access to scratch notes without leaving their workflow.
 
+![Memoo Screenshot](memoo.png)
+
 ![macOS](https://img.shields.io/badge/macOS-15.0%2B-blue)
 ![Swift](https://img.shields.io/badge/Swift-6.0-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
