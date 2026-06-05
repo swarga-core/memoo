@@ -5,6 +5,17 @@ All notable changes to Memoo will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-06-05
+
+### Added
+
+- Automatic local backups of the notes database on every launch — the last 10 snapshots are kept in Application Support → Backups, so a bad launch can always be rolled back
+- Clear error screen when the notes database can't be read, instead of silently showing an empty app
+
+### Fixed
+
+- Prevented data loss where a failed database read was mistaken for an empty database: after a crash the app could replace all notes with a single empty one. Read failures are now surfaced and never overwrite existing data
+
 ## [1.1.0] - 2026-01-21
 
 ### Added

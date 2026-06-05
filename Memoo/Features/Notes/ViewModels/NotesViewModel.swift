@@ -9,24 +9,44 @@ final class NotesViewModel {
     private(set) var notes: [Note] = []
     var selectedNoteID: UUID?
 
+    /// True when the store could not be read. The UI shows an error instead of
+    /// silently presenting an empty state — and we never auto-create a note in
+    /// this case, which is exactly what destroyed data after a crash before.
+    private(set) var loadFailed = false
+
     var selectedNote: Note? {
         notes.first { $0.id == selectedNoteID }
     }
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
-        fetchNotes()
+        guard fetchNotes() else {
+            // Store could not be read — surface the error and write nothing.
+            return
+        }
         ensureAtLeastOneNote()
         restoreLastSelectedNote()
     }
 
     // MARK: - Fetch
 
-    func fetchNotes() {
+    /// Loads notes from the store. Returns `false` on a read failure so callers
+    /// can distinguish "store is empty" from "store could not be read".
+    /// Crucially, a failure does NOT clobber the in-memory notes with `[]`.
+    @discardableResult
+    func fetchNotes() -> Bool {
         let descriptor = FetchDescriptor<Note>(
             sortBy: [SortDescriptor(\.order)]
         )
-        notes = (try? modelContext.fetch(descriptor)) ?? []
+        do {
+            notes = try modelContext.fetch(descriptor)
+            loadFailed = false
+            return true
+        } catch {
+            loadFailed = true
+            print("Memoo: failed to fetch notes: \(error)")
+            return false
+        }
     }
 
     // MARK: - Create

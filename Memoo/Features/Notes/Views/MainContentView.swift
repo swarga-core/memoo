@@ -9,8 +9,12 @@ struct MainContentView: View {
     var body: some View {
         Group {
             if let viewModel = viewModel {
-                MainContentInnerView(viewModel: viewModel)
-                    .handleCommands()
+                if viewModel.loadFailed {
+                    StoreErrorView()
+                } else {
+                    MainContentInnerView(viewModel: viewModel)
+                        .handleCommands()
+                }
             } else {
                 ProgressView()
                     .onAppear {
@@ -18,6 +22,34 @@ struct MainContentView: View {
                     }
             }
         }
+    }
+}
+
+/// Shown when the notes store can't be read. We intentionally do NOT create or
+/// save anything here — the on-disk data is left untouched so it stays
+/// recoverable, and the user is told what happened instead of seeing an empty
+/// app that quietly overwrites their notes.
+struct StoreErrorView: View {
+    var body: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 32))
+                .foregroundStyle(.orange)
+            Text("Couldn't open your notes")
+                .font(.headline)
+            Text("The notes database couldn't be read. Your data has not been modified and a backup is kept at\nApplication Support → Backups.\n\nPlease quit and restart. If notes are still missing, the backup can be restored.")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+            Button("Quit Memoo") {
+                NSApp.terminate(nil)
+            }
+            .keyboardShortcut("q", modifiers: .command)
+        }
+        .padding(24)
+        .frame(minWidth: 400, minHeight: 300)
+        .background(Color(nsColor: .windowBackgroundColor))
     }
 }
 
